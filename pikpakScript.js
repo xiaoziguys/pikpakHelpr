@@ -2,13 +2,14 @@
 // @name         pikpak助手
 // @namespace    http://tampermonkey.net/
 // @version      0.1
-// @description  try to take over the world!
+// @description  pikpak网盘助手，绕过ip限制，支持aria2下载!
 // @author       xiaoziguys
 // @match        https://mypikpak.com/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=mypikpak.com
 // @grant        unsafeWindow
 // @grant        GM_xmlhttpRequest
 // @run-at       document-start
+// @license      MIT
 // ==/UserScript==
 function Toast(dom, value) {
     dom.innerText = value
