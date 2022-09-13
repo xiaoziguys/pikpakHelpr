@@ -2,7 +2,7 @@
 // @name         pikpak助手
 // @name:zh-CN   pikpak助手
 // @namespace    http://tampermonkey.net/
-// @version      0.4
+// @version      0.6
 // @description  pikpak网盘助手，绕过ip限制，支持aria2下载!
 // @description:zh-CN  pikpak网盘助手，绕过ip限制，支持aria2下载!
 // @author       xiaoziguys
@@ -127,7 +127,7 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
             let btnBox = document.getElementsByClassName('add-resources')[0]
             let configBtn = document.createElement('button')
             configBtn.innerText = '配置aira2'
-            configBtn.className = 'el-button el-button--primary'
+            configBtn.className = 'el-button el-button--primary aria-config-btn'
             configBtn.style.marginTop = '10px'
             btnBox.append(configBtn)
             // form
@@ -138,8 +138,9 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
             top: 20vh;
             position: fixed;
             background: #fff;
-            left: calc(50vw - 50px);
-            /* height: 30px; */
+            left: 50%;
+            width: 320px;
+            transform: translate(-50%, 0);
             padding: 20px;
             box-shadow: 0 2px 8px rgb(0 0 0 / 10%);;
             border-radius: 4px;
@@ -163,6 +164,12 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
             border-radius: 4px;
             visibility: hidden;
             }
+            @media screen and (max-width: 760px) {
+            .add-resources .aria-config-btn {
+            margin-top: 0px!important;
+            margin-left: 10px;
+            }
+            }
             `)
             document.body.append(form)
             form.innerHTML = `
@@ -173,6 +180,7 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
             密钥:<br/>
             <div class="el-input xz-input"><input class="el-input__inner" id="aria2Token"></input></div>
             <button class="el-button el-button--primary" id="ariaSaveBtn">保存</button>
+            <button class="el-button" id="ariaCancelBtn">取消</button>
             `
             //toast
             let toast = document.createElement('div')
@@ -180,6 +188,7 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
             document.body.append(toast)
             // 配置aria2
             let ariaSaveBtn = document.getElementById('ariaSaveBtn')
+            let ariaCancelBtn = document.getElementById('ariaCancelBtn')
             let ariaInput = document.getElementById('aria2Host')
             let ariaPathInput = document.getElementById('aria2path')
             let ariaTokenInput = document.getElementById('aria2Token')
@@ -198,6 +207,9 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
                 ariaPath = ariaPathInput.value || ''
                 ariaToken = ariaTokenInput.value || ''
                 Toast(toast, '配置成功')
+                form.style.visibility = 'hidden'
+            })
+            ariaCancelBtn.addEventListener('click', () => {
                 form.style.visibility = 'hidden'
             })
             // token
