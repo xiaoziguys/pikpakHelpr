@@ -215,7 +215,7 @@ async function postData(url = '', data = {}, customHeaders = {}, method = 'GET')
             // token
             let token = ''
             let captcha = ''
-            for (let i = 0; i < 10; i++) {
+            for (let i = 0; i < window.localStorage.length; i++) {
                 let key = window.localStorage.key(i)
                 if (key && key.startsWith('credentials')) {
                     let tokenData = JSON.parse(window.localStorage.getItem(key))
