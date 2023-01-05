@@ -66,6 +66,7 @@ const push = () => {
   let ariaHost = window.localStorage.getItem('ariaHost') || ''
   let ariaPath = window.localStorage.getItem('ariaPath') || ''
   let ariaToken = window.localStorage.getItem('ariaToken') || ''
+  let ariaParams = window.localStorage.getItem('ariaParams') || ''
   let errorMSG = ''
   if (!ariaHost) {
     emits('msg', '请先配置aria2')
@@ -88,6 +89,13 @@ const push = () => {
         ]
       }
       ariaPath && (ariaData.params[1].dir = ariaPath)
+      if (ariaParams) {
+        const customParams = ariaParams.split(';')
+        customParams.forEach(item => {
+          const customParam = item.split('=')
+          ariaData.params[1][customParam[0]] = customParam[1]
+        })
+      }
       ariaToken && (ariaData.params.unshift(`token:${ariaToken}`))
       total--
       pushToAria(ariaHost, ariaData).then((ariares) => {

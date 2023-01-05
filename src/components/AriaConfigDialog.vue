@@ -12,6 +12,10 @@
       <div class="form-item">
         <span>密钥:</span><div class="el-input xz-input"><input v-model="form.token" class="el-input__inner"/></div>
       </div>
+      <div class="form-item">
+        <span>自定义参数:</span><div class="el-input xz-input"><input v-model="form.params" class="el-input__inner"/></div>
+        参数名=参数;参数名2=参数<br/>自定义参数例子:<br/> all-proxy=http://192.168.88.189;split=1
+      </div>
     </div>
     <div class="footer">
       <div class="btn el-button el-button--primary" @click="save">保存</div>
@@ -35,17 +39,20 @@ const close = () => {
 let ariaHost = window.localStorage.getItem('ariaHost') || ''
 let ariaPath = window.localStorage.getItem('ariaPath') || ''
 let ariaToken = window.localStorage.getItem('ariaToken') || ''
+let ariaParams = window.localStorage.getItem('ariaParams') || ''
 
 const form = reactive({
   host: ariaHost,
   path: ariaPath,
-  token: ariaToken
+  token: ariaToken,
+  params: ariaParams
 })
 
 const save = () => {
   window.localStorage.setItem('ariaHost',form.host)
   window.localStorage.setItem('ariaPath',form.path)
   window.localStorage.setItem('ariaToken',form.token)
+  window.localStorage.setItem('ariaParams',form.params)
   close()
   emits('msg', '保存成功！')
 }
