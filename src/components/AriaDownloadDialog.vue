@@ -28,12 +28,12 @@ watch(
     () => props.show,
     (val) => {
       if (val) {
-        const domItems = document.body.querySelectorAll('.row.grid')
+        const domItems = document.body.querySelectorAll('.row.list')
         const tempList = []
         for (let i = 0; i < domItems.length; i++) {
           const item = domItems[i]
-          if (!domItems[i].querySelector('.folder-cover')) {
-            tempList.push({id: item.id, name: item.querySelector('.name').innerText})
+          if (item.querySelector(".size").innerText !== '-') {
+            tempList.push({id: item.id, name: item.querySelector('.file-name').innerText})
           }
         }
         list.value = tempList
