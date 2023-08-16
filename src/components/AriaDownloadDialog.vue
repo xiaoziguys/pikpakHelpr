@@ -36,6 +36,15 @@ watch(
             tempList.push({id: item.id, name: item.querySelector('.name').innerText})
           }
         }
+        if (domItems.length == 0) {
+          const domListItems = document.body.querySelectorAll(".row.list:not(.folder)");
+          for (let i = 0; i < domListItems.length; i++) {
+            const item = domListItems[i];
+            if (item.querySelector(".name").innerText !== "") {
+              tempList.push({ id: item.id, name: item.querySelector(".name").innerText });
+            }
+          }
+        }
         list.value = tempList
       }
     }
