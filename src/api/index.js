@@ -81,7 +81,7 @@ export function getDownload (id) {
     }
     if (key && key.startsWith('captcha')) {
       let tokenData = JSON.parse(window.localStorage.getItem(key))
-      captcha = tokenData.token
+      captcha = tokenData.captcha_token
     }
   }
   let header = {
